@@ -4257,6 +4257,18 @@
         } else {
           b.x = Math.max(0, drag.ox + dx);
           b.y = Math.max(0, drag.oy + dy);
+          if (!e.altKey) {   // 카드끼리 딱 붙기 (Alt 누르면 해제)
+            const T = 14 / (drag.z || 1), mw = drag.note.offsetWidth, mh = drag.note.offsetHeight; let bx = null, by = null, bdx = T, bdy = T;
+            document.querySelectorAll('.qnote, .qmemo, .qnpc').forEach(o => {
+              if (o === drag.note || o.offsetParent === null) return;
+              const ox = parseFloat(o.style.left), oy = parseFloat(o.style.top), ow = o.offsetWidth, oh = o.offsetHeight; if (isNaN(ox) || isNaN(oy)) return;
+              const near = 60 / (drag.z || 1), ovY = b.y < oy + oh + near && b.y + mh > oy - near, ovX = b.x < ox + ow + near && b.x + mw > ox - near;
+              const Ta = 5 / (drag.z || 1);   // 정렬(높이 맞춤)은 약하게 → 살짝 엇갈리게 둘 수 있음
+              if (ovY) { [ox + ow, ox - mw].forEach(cx => { const d = Math.abs(b.x - cx); if (d < bdx) { bdx = d; bx = cx; } }); [ox, ox + ow - mw].forEach(cx => { const d = Math.abs(b.x - cx); if (d < Ta && d < bdx) { bdx = d; bx = cx; } }); }
+              if (ovX) { [oy + oh, oy - mh].forEach(cy => { const d = Math.abs(b.y - cy); if (d < bdy) { bdy = d; by = cy; } }); [oy, oy + oh - mh].forEach(cy => { const d = Math.abs(b.y - cy); if (d < Ta && d < bdy) { bdy = d; by = cy; } }); }
+            });
+            if (bx !== null) b.x = Math.max(0, Math.round(bx)); if (by !== null) b.y = Math.max(0, Math.round(by));
+          }
           drag.note.style.left = b.x + 'px'; drag.note.style.top = b.y + 'px';
         }
         sizeBoardCanvas();

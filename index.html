@@ -1739,7 +1739,7 @@
 
 
     // ===== 서버 연결: google.script.run 이 응답 없으면 같은 주소로 직접 요청(fetch)으로 자동 전환 =====
-    const EXEC_URL_DEFAULT = 'https://script.google.com/macros/s/AKfycbxzIiUa1NzEvAZM_9dFo68BZ5sdWCEC3Ikz8erbxe7zv4OutT9k8wOzQVA-2CIPvtlI/exec';
+    const EXEC_URL_DEFAULT = 'https://script.google.com/macros/s/AKfycbxh_nws9ney8Vk6yXVXoVEOSmF2jdFwQgFVtlY2IGvtfatMJOUqSVce6ox2Xbu8N8po/exec';
     function execUrl() { try { return localStorage.getItem('adventure_exec_url') || EXEC_URL_DEFAULT; } catch (e) { return EXEC_URL_DEFAULT; } }
     function diagShow(msg) { try { console.info('[sync]', msg); } catch (e) {} }
     function fetchT(url, opt, ms) {
@@ -1794,13 +1794,13 @@
       }
       const cols = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#e67e22', '#95a5a6'];
       const hue = id => { let h = 0; for (const c of String(id)) h = (h * 31 + c.charCodeAt(0)) | 0; return cols[Math.abs(h) % cols.length]; };
-      f.innerHTML = list.map(u => { const nm = (u.name || '').trim() || '이름 없음'; return `<div ${u.id === PRES.id ? 'data-me="1"' : ''} style="display:flex;align-items:center;gap:6px;padding:2px 0;font-weight:${u.id === PRES.id ? 800 : 500}"><span style="width:10px;height:10px;border-radius:3px;background:${hue(u.id)};flex:none"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(nm)}${u.id === PRES.id ? ' (나)' : ''}</span></div>`; }).join('');
+      f.innerHTML = list.map(u => { const nm = (u.name || '').trim() || ('손님 ' + String(u.id).slice(-2)); return `<div ${u.id === PRES.id ? 'data-me="1"' : ''} style="display:flex;align-items:center;gap:6px;padding:2px 0;font-weight:${u.id === PRES.id ? 800 : 500}"><span style="width:10px;height:10px;border-radius:3px;background:${hue(u.id)};flex:none"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(nm)}${u.id === PRES.id ? ' (나)' : ''}</span></div>`; }).join('');
     }
     function presencePing() {
       if (document.hidden) return;
       fetchGet('ping&id=' + encodeURIComponent(PRES.id) + '&name=' + encodeURIComponent(presName())).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j && j.online) presenceRender(j.online); else throw 0; }).catch(() => { presenceRender([{ id: PRES.id, name: presName() }]); });
     }
-    setTimeout(() => { if (!localStorage.getItem('adv_pres_name')) { try { const v = prompt('접속 표시에 쓸 이름을 적어 주세요 (취소하면 이름 없이 표시)', ''); localStorage.setItem('adv_pres_name', (v || '').trim().slice(0, 20) || ' '); } catch (e) {} } presencePing(); setInterval(presencePing, 25000); document.addEventListener('visibilitychange', presencePing); }, 4000);
+    setTimeout(() => { presencePing(); setInterval(presencePing, 25000); document.addEventListener('visibilitychange', presencePing); }, 4000);
     function fetchPost(body) { return fetchT(execUrl(), { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }); }
     // 기본: 주소로 직접 요청(fetch). 실패하면 google.script.run 으로 한 번 더 시도.
     function srvCall(runName, args, viaFetchFn, waitMs, ok, fail) {

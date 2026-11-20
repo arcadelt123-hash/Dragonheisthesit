@@ -1798,7 +1798,7 @@
     }
     function presencePing() {
       if (document.hidden) return;
-      fetchGet('ping&id=' + encodeURIComponent(PRES.id) + '&name=' + encodeURIComponent(presName())).then(r => r.json()).then(j => { if (j && j.online) presenceRender(j.online); }).catch(() => {});
+      fetchGet('ping&id=' + encodeURIComponent(PRES.id) + '&name=' + encodeURIComponent(presName())).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j && j.online) presenceRender(j.online); else throw 0; }).catch(() => { presenceRender([{ id: PRES.id, name: presName() }]); });
     }
     setTimeout(() => { if (!localStorage.getItem('adv_pres_name')) { try { const v = prompt('접속 표시에 쓸 이름을 적어 주세요 (취소하면 이름 없이 표시)', ''); localStorage.setItem('adv_pres_name', (v || '').trim().slice(0, 20) || ' '); } catch (e) {} } presencePing(); setInterval(presencePing, 25000); document.addEventListener('visibilitychange', presencePing); }, 4000);
     function fetchPost(body) { return fetchT(execUrl(), { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }); }

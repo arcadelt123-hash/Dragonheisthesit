@@ -1635,7 +1635,7 @@
     .ctx-menu .cx-i:hover img, .ctx-menu .cx-arrow:hover img, .ctx-menu .cx-pcimg:hover img, .ctx-menu .cx-stb:hover img, .ctx-menu .tl-swb:hover .tl-swc { transform: scale(1.1); }
     .ctx-menu .cx-i.sel img, .ctx-menu .cx-b.on img, .ctx-menu .cx-stb.on img, .ctx-menu .cx-pcimg.on img, .ctx-menu .tl-swb.on .tl-swc { transform: scale(1.3); filter: drop-shadow(0 0 2px rgba(255,214,90,.95)) drop-shadow(0 0 7px rgba(255,190,40,.85)) drop-shadow(0 0 14px rgba(255,170,0,.55)); }
     .ctx-menu .cx-tools .cx-arrow img, .ctx-menu .cx-tools .cx-arrow img.lk { width: 34px !important; height: 34px !important; object-fit: contain; } .ctx-menu .cx-tools .cx-arrow { padding: 2px !important; } .ctx-menu .cx-tools .cx-blank { width: 30px !important; height: 30px !important; }
-    .ctx-menu .cx-ico .cx-i { width: 28px !important; height: 28px !important; padding: 1px !important; } .ctx-menu .cx-ico .cx-i img { width: 100% !important; height: 100% !important; object-fit: contain; } .ctx-menu .cx-tools { flex-wrap: nowrap !important; gap: 4px; justify-content: flex-start; }
+    .ctx-menu .cx-ico .cx-i { width: 28px !important; height: 28px !important; padding: 1px !important; } .ctx-menu.slim { width: auto; } .ctx-menu.slim .cx-ico { gap: 16px !important; } .ctx-menu.slim .cx-ico .cx-i { width: 36px !important; height: 36px !important; } .ctx-menu .cx-ico .cx-i img { width: 100% !important; height: 100% !important; object-fit: contain; } .ctx-menu .cx-tools { flex-wrap: nowrap !important; gap: 4px; justify-content: flex-start; }
     /* v186 아이콘 메뉴 공통 규칙: 앞으로 추가되는 아이콘 버튼도 자동 적용 (테두리 없음 · 선택/누름 시 금빛 강조) */
     .ctx-menu button:has(> img), .ctx-menu button:has(> svg), .tcg-ctxp button { border: 0 !important; background: transparent !important; box-shadow: none !important; outline: none !important; }
     .ctx-menu button > img, .tcg-ctxp button > img, .tcg-ctxp button > svg { transition: transform .18s, filter .18s; }
@@ -3939,6 +3939,7 @@
       closeCtx(); ctxKind = kind; ctxId = id; ctxAt = at || null;
       const menu = document.createElement('div'); menu.id = 'ctx-menu'; menu.className = 'ctx-menu';
       menu.addEventListener('contextmenu', ev => ev.preventDefault());
+      if (kind === 'qtile') menu.classList.add('slim');
       document.body.appendChild(menu); buildCtx();
       const w = menu.offsetWidth, hh = menu.offsetHeight;
       menu.style.left = Math.max(8, Math.min(x, innerWidth - w - 8)) + 'px';
@@ -4760,7 +4761,7 @@
     function tcgStripCenter() { const el = document.getElementById('tcg-strip'); if (!el) return null; const cs = [...el.querySelectorAll('.ts-c')], mid = el.scrollLeft + el.clientWidth / 2; let bi = 0, bd = 1e9; cs.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < bd) { bd = d; bi = i; } }); return { el, cs, bi }; }
     function tcgStripGo(dir) { const o = tcgStripCenter(); if (!o) return; const i = Math.max(0, Math.min(o.cs.length - 1, o.bi + dir)), c = o.cs[i]; o.el.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - o.el.clientWidth / 2, behavior: 'smooth' }); }
     document.addEventListener('keydown', e => { if (!document.getElementById('tcg-strip') || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName || '')) return; if (e.key === 'ArrowLeft') tcgStripGo(-1); else if (e.key === 'ArrowRight') tcgStripGo(1); else if (e.key === 'Enter') { const o = tcgStripCenter(); if (o) o.cs[o.bi].click(); } else return; e.preventDefault(); });
-    function tcgStripFan(el) { const half = el.clientWidth / 2 || 1, RX = 187, RY = 187; el.querySelectorAll('.ts-c').forEach(c => { const dp = c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - half, th = Math.max(-100, Math.min(100, dp / 36 * 11)), rd = th * Math.PI / 180, f = Math.max(0, 1 - Math.abs(dp) / 60), hid = Math.abs(th) > 58, rot = Math.atan2(RY * Math.sin(rd), RX * Math.cos(rd)) * 180 / Math.PI;
+    function tcgStripFan(el) { const half = el.clientWidth / 2 || 1, RX = 187, RY = 187; el.querySelectorAll('.ts-c').forEach(c => { const dp = c.offsetLeft + c.offsetWidth / 2 - el.scrollLeft - half, dq = dp + 18, th = Math.max(-100, Math.min(100, dq / 36 * 11)), rd = th * Math.PI / 180, f = Math.max(0, 1 - Math.abs(dp) / 60), hid = Math.abs(th) > 58, rot = Math.atan2(RY * Math.sin(rd), RX * Math.cos(rd)) * 180 / Math.PI;
       c.style.setProperty('--r', rot.toFixed(1) + 'deg'); c.style.setProperty('--x', (RX * Math.sin(rd) - dp).toFixed(1) + 'px'); c.style.setProperty('--y', (RY * (1 - Math.cos(rd)) - 20 - f * 34).toFixed(1) + 'px'); c.style.setProperty('--s', (1 + f * .16).toFixed(3));
       c.style.zIndex = Math.round(100 - Math.abs(th) + f * 20); c.style.opacity = hid ? '0' : '1'; c.style.pointerEvents = hid ? 'none' : ''; }); }
     // 부채꼴 카드를 위로 끌어 올리면 지금 카드 옆에 함께 펼침 (최대 5장)
@@ -6233,10 +6234,10 @@
       const st = document.querySelector('.fan-stage'); if (!st) return; const cw = fanCW;
       st.querySelectorAll('.fan-row').forEach(row => { const r = row.dataset.r, act = r === fanAct, idx = fanIdx[r]; row.classList.toggle('act', act); row.style.zIndex = act ? 20 : 10;
         row.querySelectorAll('.fan-c').forEach(el => { const o = Number(el.dataset.i) - idx, a = Math.abs(o), sg = Math.sign(o);
-          const th = Math.min(a, 7) * 11, rd = th * Math.PI / 180, R = cw * 0.42 / (11 * Math.PI / 180), x = sg * R * Math.sin(rd), rot = sg * th, sc = o === 0 ? 1.06 : 1, y = o === 0 ? -30 : R * (1 - Math.cos(rd)) - 6;
+          const th = Math.max(-7.5, Math.min(7.5, o + 0.5)) * 11, rd = th * Math.PI / 180, R = cw * 0.42 / (11 * Math.PI / 180), x = R * Math.sin(rd), rot = th, sc = o === 0 ? 1.06 : 1, y = R * (1 - Math.cos(rd)) + 34 - (o === 0 ? 30 : 0);
           if (instant) el.style.transition = 'none';
           el.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${y}px) rotate(${rot}deg) scale(${sc})`;
-          el.style.zIndex = 100 - a; el.style.opacity = a > 8 ? 0 : (1 - Math.max(0, a - 4) * .1); el.style.pointerEvents = a > 8 ? 'none' : 'auto'; el.classList.toggle('sel', o === 0);
+          el.style.zIndex = o === 0 ? 200 : 100 - a; el.style.opacity = a > 8 ? 0 : (1 - Math.max(0, a - 4) * .1); el.style.pointerEvents = a > 8 ? 'none' : 'auto'; el.classList.toggle('sel', o === 0);
           if (instant) { void el.offsetWidth; el.style.transition = ''; } }); });
       const cap = document.getElementById('fan-cap'), F = window.__fan || {}; if (cap) cap.innerHTML = ((F[fanAct] || {}).caps || [])[fanIdx[fanAct]] || '';
     }

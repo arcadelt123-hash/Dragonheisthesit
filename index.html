@@ -1999,7 +1999,6 @@
     .lp-th { display: inline-block; width: 26px; height: 48px; background-size: contain; background-position: center; background-repeat: no-repeat; }
     .lp-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 6px; font-size: .84rem; } .lp-row select { font-size: .82rem; padding: 4px 8px; border: 1px solid var(--border-subtle); border-radius: 8px; }
     #presence-btn .pres-tip { display: none; position: absolute; top: calc(100% + 6px); right: 0; min-width: 130px; padding: 7px 10px; border-radius: 10px; background: rgba(20,18,14,.92); color: #fff; font-size: 12px; white-space: nowrap; z-index: 500; text-align: left; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
-    #presence-btn:hover .pres-tip, #presence-btn:focus .pres-tip { display: block; }
     .pres-glow { box-shadow: 0 0 0 2px var(--pg, #e6b24a), 0 0 12px 3px var(--pg, #e6b24a) !important; animation: presGl 1.6s ease-in-out infinite; } @keyframes presGl { 50% { box-shadow: 0 0 0 2px var(--pg, #e6b24a), 0 0 20px 6px var(--pg, #e6b24a); } }
     .land-sec .folder-mgmt-item { border: 0 !important; padding: 0 !important; background: transparent !important; margin: 0 !important; } .land-sec .folder-mgmt-item > div:first-child { display: none; }
     .pc-altb { position: absolute; top: 6px; right: 6px; z-index: 40; width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.7); background: rgba(20,16,10,.62); color: #fff; font-size: 15px; line-height: 1; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; } .pc-altb:hover { background: rgba(184,137,58,.9); }
@@ -3012,8 +3011,7 @@
       pb.removeAttribute('title');
       const nmOf = u => (u.name || '').trim() || ('손님 ' + String(u.id).slice(-2));
       const lampOn = list.some(u => !presIsMe(u)), lampIg = lampOn && !window.__lampWas; if (!fb) window.__lampWas = lampOn;
-      pb.innerHTML = `<span class="pres-lamp${lampOn ? ' on' : ''}${lampIg ? ' ignite' : ''}"></span>`
-        + `<span class="pres-tip">` + list.map(u => `<div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-weight:${u.id === PRES.id ? 800 : 500}"><span style="width:9px;height:9px;border-radius:50%;background:${presHue(u.id, u.id === PRES.id ? (presColor() || u.color) : u.color)};flex:none"></span><span>${escapeHtml(nmOf(u))}${u.id === PRES.id ? ' (나)' : ''}${u.ed && u.id !== PRES.id ? ` <small style="opacity:.7;font-weight:500">✎ ${escapeHtml(String(u.ed).split('¦')[0])}</small>` : ''}</span></div>`).join('') + `</span>`;
+      pb.innerHTML = `<span class="pres-lamp${lampOn ? ' on' : ''}${lampIg ? ' ignite' : ''}"></span>`;
       let ev = []; try { if (!fb) ev = presTrack(list); } catch (e) {}
       if (ev.some(x => x[0] === 'in')) { const lp = pb.querySelector('.pres-lamp'); if (lp) { lp.classList.add('flare'); setTimeout(() => lp.classList.remove('flare'), 2600); } }
       try { window.__fbcWho && window.__fbcWho(ev); } catch (e) {}

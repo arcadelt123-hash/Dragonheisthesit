@@ -1,0 +1,866 @@
+Artificer	아티피서
+Barbarian	바바리안
+Bard	바드
+Cleric	클레릭
+Druid	드루이드
+Expert Sidekick	전문가 사이드킥
+Fighter	파이터
+Monk	몽크
+Paladin	팔라딘
+Ranger	레인저
+Rogue	로그
+Sorcerer	소서러
+Spellcaster Sidekick	주문시전자 사이드킥
+Warlock	워락
+Warrior Sidekick	전사 사이드킥
+Wizard	위저드
+Mystic	미스틱
+Aberrant Mind	기괴한 정신
+Alchemist	연금술사
+Arcana Domain	비전 권역
+Arcane Archer	비전 궁수
+Arcane Trickster	비전 사기꾼
+Armorer	갑주사
+Artillerist	포격술사
+Assassin	암살자
+Battle Master	전투의 달인
+Battle Smith	전투 대장장이
+Beast Master	야수 조련사
+Bladesinging	칼날노래
+Cavalier	기병
+Champion	투사
+Chronurgy Magic	시간 마법
+Circle of Dreams	꿈의 회합
+Circle of Spores	포자의 회합
+Circle of Stars	별의 회합
+Circle of the Land	대지의 회합
+Circle of the Moon	달의 회합
+Circle of the Shepherd	목자의 회합
+Circle of Wildfire	들불의 회합
+Clockwork Soul	태엽 영혼
+College of Creation	창조 학파
+College of Eloquence	웅변 학파
+College of Glamour	매혹 학파
+College of Lore	전승 학파
+College of Spirits	영혼 학파
+College of Swords	검 학파
+College of Valor	용맹 학파
+College of Whispers	속삭임 학파
+Death Domain	죽음 권역
+Divine Soul	신성한 영혼
+Draconic Bloodline	용의 혈통
+Drakewarden	드레이크 수호자
+Echo Knight	메아리 기사
+Eldritch Knight	섬뜩한 기사
+Fey Wanderer	요정 방랑자
+Forge Domain	대장간 권역
+Gloom Stalker	어둠 추적자
+Grave Domain	무덤 권역
+Graviturgy Magic	중력 마법
+Horizon Walker	지평선 보행자
+Hunter	사냥꾼
+Inquisitive	탐문자
+Knowledge Domain	지식 권역
+Life Domain	생명 권역
+Light Domain	빛 권역
+Lunar Sorcery	달의 마력
+Mastermind	지략가
+Monster Slayer	괴물 사냥꾼
+Nature Domain	자연 권역
+Oath of Conquest	정복의 맹세
+Oath of Devotion	헌신의 맹세
+Oath of Glory	영광의 맹세
+Oath of Redemption	구원의 맹세
+Oath of the Ancients	고대의 맹세
+Oath of the Crown	왕관의 맹세
+Oath of the Watchers	감시자의 맹세
+Oath of Vengeance	복수의 맹세
+Oathbreaker	맹세파기자
+Order Domain	질서 권역
+Order of Scribes	필경사 교단
+Path of the Ancestral Guardian	선조 수호자의 길
+Path of the Battlerager	전투광의 길
+Path of the Beast	야수의 길
+Path of the Berserker	광전사의 길
+Path of the Giant	거인의 길
+Path of the Storm Herald	폭풍 전령의 길
+Path of the Totem Warrior	토템 전사의 길
+Path of the Zealot	광신자의 길
+Path of Wild Magic	야생 마법의 길
+Peace Domain	평화 권역
+Phantom	망령
+Psi Warrior	초능력 전사
+Purple Dragon Knight (Banneret)	보라 용 기사 (기수)
+Rune Knight	룬 기사
+Samurai	사무라이
+School of Abjuration	방호술 학파
+School of Conjuration	조형술 학파
+School of Divination	예지술 학파
+School of Enchantment	환혹술 학파
+School of Evocation	방출술 학파
+School of Illusion	환영술 학파
+School of Necromancy	사령술 학파
+School of Transmutation	변환술 학파
+Scout	정찰병
+Shadow Magic	그림자 마법
+Soulknife	영혼칼
+Storm Sorcery	폭풍 마력
+Swarmkeeper	군체 수호자
+Swashbuckler	활극가
+Tempest Domain	폭풍 권역
+The Archfey	대요정
+The Celestial	천상체
+The Fathomless	심연
+The Fiend	악마
+The Genie	지니
+The Great Old One	위대한 옛것
+The Hexblade	주술검
+The Undead	언데드
+The Undying	불사자
+Thief	도둑
+Trickery Domain	기만 권역
+Twilight Domain	황혼 권역
+War Domain	전쟁 권역
+War Magic	전쟁 마법
+Way of Mercy	자비의 길
+Way of Shadow	그림자의 길
+Way of the Ascendant Dragon	승천한 용의 길
+Way of the Astral Self	아스트랄 자아의 길
+Way of the Drunken Master	취권 달인의 길
+Way of the Four Elements	사대 원소의 길
+Way of the Kensei	검성의 길
+Way of the Long Death	긴 죽음의 길
+Way of the Open Hand	열린 손의 길
+Way of the Sun Soul	태양 영혼의 길
+Wild Magic	야생 마법
+Ambition Domain (PSA)	야망 권역 (PSA)
+Knowledge Domain (PSA)	지식 권역 (PSA)
+Solidarity Domain (PSA)	연대 권역 (PSA)
+Strength Domain (PSA)	힘 권역 (PSA)
+Zeal Domain (PSA)	열의 권역 (PSA)
+Pyromancer (PSK)	화염술사 (PSK)
+Order of the Avatar	화신 교단
+Order of the Awakened	각성자 교단
+Order of the Immortal	불멸자 교단
+Order of the Nomad	유랑자 교단
+Order of the Soul Knife	영혼칼 교단
+Order of the Wu Jen	우젠 교단
+Path	길
+Arcane Abjuration	비전 퇴출
+Artisan's Blessing	장인의 축복
+Balm of Peace	평화의 향유
+Charm Animals and Plants	동식물 매혹
+Cloak of Shadows	그림자 망토
+Consuming Fervor	집어삼키는 열의
+Destructive Wrath	파괴적 분노
+Feat of Strength	힘의 위업
+Guided Strike	인도된 일격
+Harness Divine Power	신성력 활용
+Invoke Duplicity	분신 기원
+Knowledge of the Ages	시대의 지식
+Order's Demand	질서의 요구
+Path to the Grave	무덤으로 가는 길
+Preserve Life	생명 보존
+Radiance of the Dawn	여명의 광휘
+Read Thoughts	생각 읽기
+Touch of Death	죽음의 손길
+Twilight Sanctuary	황혼의 성역
+War God's Blessing	전쟁신의 축복
+Aberrant Dragonmark	기형 용표
+Accursed Specter	저주받은 망령
+Action Surge	행동 연쇄
+Action Surge (two uses)	행동 연쇄 (2회)
+Actor	배우
+Additional Fighting Style	추가 전투 방식
+Additional Magical Secrets	추가 마법 비밀
+Additional Rune Known	추가 룬 습득
+Adept of the Black Robes	검은 로브의 숙련자
+Adept of the Red Robes	붉은 로브의 숙련자
+Adept of the White Robes	흰 로브의 숙련자
+Agent of Order	질서의 요원
+Alagondar Scion	알라곤다르의 후예
+Alchemical Savant	연금술의 대가
+Alert	경계
+Alter Memories	기억 변경
+Ambush Master	매복의 달인
+Animating Performance	생명 불어넣는 공연
+Anvilwrought	모루 세공
+Arcane Abeyance	비전 유예
+Arcane Charge	비전 돌격
+Arcane Dabbler	비전 애호가
+Arcane Firearm	비전 화기
+Arcane Jolt	비전 충격
+Arcane Mastery	비전 숙달
+Arcane Recovery	비전 회복
+Arcane Tradition	비전 전통
+Archdruid	대드루이드
+Armor Modifications	갑옷 개조
+Armor of Hexes	주술의 갑옷
+Artificer Initiate	아티피서 입문자
+Artificer Specialist	아티피서 전문 분야
+Ascendant Aspect	승천한 면모
+Aspect of the Beast	야수의 면모
+Aspect of the Wyrm	웜의 면모
+Athlete	운동선수
+Aura improvements	오라 향상
+Aura of Alacrity	민첩의 오라
+Aura of Conquest	정복의 오라
+Aura of Courage	용기의 오라
+Aura of Devotion	헌신의 오라
+Aura of Hate	증오의 오라
+Aura of Protection	보호의 오라
+Aura of the Guardian	수호자의 오라
+Aura of the Sentinel	파수꾼의 오라
+Aura of Warding	방호의 오라
+Avatar of Battle	전투의 화신
+Avatar of Healing	치유의 화신
+Avatar of Speed	속도의 화신
+Avenging Angel	복수의 천사
+Awakened Astral Self	각성한 아스트랄 자아
+Baleful Scion	흉악한 후예
+Bard College	바드 학파
+Bardic Inspiration	바드의 영감
+Bardic Inspiration (d10)	바드의 영감 (d10)
+Bardic Inspiration (d12)	바드의 영감 (d12)
+Bardic Inspiration (d8)	바드의 영감 (d8)
+Bardic Versatility	바드의 다재다능
+Bastion of Law	법의 보루
+Battle Magic	전투 마법
+Battle Readiness	전투 준비
+Battlerager Charge	전투광 돌격
+Beast Spells	야수 주문
+Beguiling Defenses	현혹의 방어
+Beguiling Twist	현혹의 비틀기
+Bend Luck	운명 비틀기
+Benign Transposition	온건한 위치 교환
+Bestial Fury	야수의 격노
+Bestial Soul	야수의 영혼
+Blaze of Glory	영광의 불꽃
+Blazing Revival	타오르는 부활
+Blessed Healer	축복받은 치유사
+Blessed Strikes	축복받은 일격
+Blindsense	맹감
+Body of the Astral Self	아스트랄 자아의 몸
+Bolstering Magic	강화 마법
+Bond of Fang and Scale	송곳니와 비늘의 유대
+Bonus Proficiencies	추가 숙련
+Bountiful Luck	풍성한 행운
+Brutal Critical (1 die)	잔혹한 치명타 (주사위 1개)
+Brutal Critical (2 dice)	잔혹한 치명타 (주사위 2개)
+Brutal Critical (3 dice)	잔혹한 치명타 (주사위 3개)
+Bulwark	보루
+Bulwark of Force	역장의 보루
+Call the Hunt	사냥의 부름
+Cantrip Formulas	소마법 공식
+Cantrip Versatility	소마법 다재다능
+Cartomancer	카드 점술사
+Cauterizing Flames	지지는 불꽃
+Celestial Resilience	천상의 회복력
+Channel Divinity	신성 변환
+Charger	돌격자
+Chef	요리사
+Chemical Mastery	화학 숙달
+Cleansing Touch	정화의 손길
+Clockwork Cavalcade	태엽 행렬
+Cohort of Chaos	혼돈의 동료
+Command Undead	언데드 지휘
+Consult the Spirits	영혼과의 상담
+Consumptive Knife	소모의 칼
+Consumptive Power	소모의 힘
+Controlled Chaos	통제된 혼돈
+Controlled Surge	통제된 쇄도
+Convergent Future	수렴하는 미래
+Coordinated Strike	협공
+Corona of Light	빛의 관
+Cosmic Omen	우주의 징조
+Countercharm	대항 매혹
+Create Thrall	노예 생성
+Creative Crescendo	창조의 크레셴도
+Crossbow Expert	크로스보우 전문가
+Crusher	분쇄자
+Cult of the Dragon Infiltrator	용 교단 잠입자
+Cunning Action	교활한 행동
+Curving Shot	휘는 사격
+Dampen Elements	원소 약화
+Danger Sense	위험 감지
+Dark Delirium	어둠의 착란
+Dark One's Own Luck	어둠의 존재의 행운
+Death Strike	죽음의 일격
+Death's Friend	죽음의 친구
+Dedicated Weapon	전용 무기
+Deep Delver	심층 탐험가
+Defensive Duelist	방어적 결투가
+Defensive Tactics	방어 전술
+Deflect Missiles	투사체 튕겨내기
+Deflecting Shroud	튕겨내는 장막
+Deft Explorer	능숙한 탐험가
+Deft Explorer Improvement	능숙한 탐험가 향상
+Defy Death	죽음 거부
+Demiurgic Colossus	조물주의 거상
+Destroy Undead (CR 1)	언데드 파괴 (CR 1)
+Destroy Undead (CR 1/2)	언데드 파괴 (CR 1/2)
+Destroy Undead (CR 2)	언데드 파괴 (CR 2)
+Destroy Undead (CR 3)	언데드 파괴 (CR 3)
+Destroy Undead (CR 4)	언데드 파괴 (CR 4)
+Diamond Soul	금강석 영혼
+Distant Strike	원격 일격
+Divine Allegiance	신성한 충성
+Divine Domain	신성 권역
+Divine Health	신성한 건강
+Divine Intervention	신성한 개입
+Divine Intervention Improvement	신성한 개입 향상
+Divine Sense	신성 감지
+Divine Smite	신성 강타
+Divine Strike	신성한 일격
+Divinely Favored	신의 총애
+Doppelganger	도플갱어
+Draconic Presence	용의 존재감
+Dragon Fear	용의 공포
+Dragon Hide	용 가죽
+Dragon Scholar	용 학자
+Dragon Wings	용의 날개
+Drake's Breath	드레이크의 숨결
+Dread Lord	공포의 군주
+Drizzt Fan	드리즈트 팬
+Drow High Magic	드로우 고위 마법
+Druid Circle	드루이드 회합
+Druidic	드루이드어
+Drunkard's Luck	주정뱅이의 행운
+Dual Wielder	쌍수 전투가
+Dungeon Delver	던전 탐험가
+Durable	튼튼함
+Durable Magic	견고한 마법
+Durable Summons	튼튼한 소환수
+Dwarven Fortitude	드워프의 강인함
+Echo Avatar	메아리 화신
+Echoing Soul	메아리치는 영혼
+Effortless Journey	수월한 여정
+Elder Champion	원로 투사
+Eldritch Adept	섬뜩한 숙련자
+Eldritch Invocations	섬뜩한 영창
+Eldritch Master	섬뜩한 대가
+Eldritch Strike	섬뜩한 일격
+Eldritch Versatility	섬뜩한 다재다능
+Elegant Courtier	우아한 궁정인
+Elegant Maneuver	우아한 기동
+Elemental Adept	원소 숙련자
+Elemental Affinity	원소 친화
+Elemental Attunement	원소 조율
+Elemental Cleaver	원소 절단자
+Elemental Gift	원소의 선물
+Elemental Mastery	원소 숙달
+Elemental Wild Shape	원소 야생 변신
+Elusive	잡히지 않음
+Elusive Paramour	잡히지 않는 연인
+Elven Accuracy	엘프의 정확성
+Ember of the Fire Giant	화염 거인의 불씨
+Embodiment of the Law	법의 화신
+Emissary of Redemption	구원의 사절
+Empowered Evocation	강화된 방출술
+Empowered Healing	강화된 치유
+Empowered Spells	강화된 주문
+Empty Body	공허한 몸
+Enhanced Bond	강화된 유대
+Entropic Ward	엔트로피 방호
+Escaped Prisoner	탈옥수
+Ethereal Step	에테르 걸음
+Evasion	회피
+Event Horizon	사건의 지평선
+Ever-Ready Shot	항시 준비된 사격
+Exalted Champion	고귀한 투사
+Exceptional Training	특별 훈련
+Expansive Bond	확장된 유대
+Expert Divination	전문 예지술
+Expertise	전문화
+Explosive Cannon	폭발 대포
+Extra Attack	추가 공격
+Extra Attack (2)	추가 공격 (2)
+Extra Attack (3)	추가 공격 (3)
+Extra Attack Improvement	추가 공격 향상
+Eye for Weakness	약점 간파
+Fade Away	사라지기
+Faithful Summons	충실한 소환
+Fanatical Focus	광신적 집중
+Fast Movement	빠른 이동
+Fathomless Plunge	심연 잠수
+Favored Enemy	선호하는 적
+Favored Enemy and Natural Explorer improvements	선호하는 적·자연 탐험가 향상
+Favored Enemy improvement	선호하는 적 향상
+Favored Foe	선호하는 원수
+Feral Instinct	야생의 본능
+Feral Senses	야생의 감각
+Ferocious Charger	맹렬한 돌격자
+Fey Reinforcements	요정 증원
+Fey Teleportation	요정 순간이동
+Fey Touched	요정의 손길
+Fiendish Resilience	악마의 회복력
+Fiery Soul	불타는 영혼
+Fighting Initiate	전투 입문자
+Fighting Style	전투 방식
+Fire in the Veins	혈관 속의 불
+Flames of Phlegethos	플레게톤의 불꽃
+Flash of Genius	천재성의 번뜩임
+Flurry of Healing and Harm	치유와 상해의 연타
+Focused Aim	집중 조준
+Focused Casting	집중 시전
+Focused Conjuration	집중 조형술
+Foe Slayer	적 처단자
+Font of Inspiration	영감의 샘
+Font of Magic	마력의 샘
+Fortified Position	요새화된 진지
+Full of Stars	별로 가득 참
+Fungal Body	균류의 몸
+Fungal Infestation	균류 감염
+Fury of the Frost Giant	서리 거인의 격노
+Gathered Whispers	모인 속삭임
+Ghost Walk	유령 걸음
+Gift of the Chromatic Dragon	색채룡의 선물
+Gift of the Gem Dragon	보석룡의 선물
+Gift of the Metallic Dragon	금속룡의 선물
+Glorious Defense	영광스러운 방어
+Grappler	붙잡기 달인
+Grasping Tentacles	움켜쥐는 촉수
+Grave Touched	무덤의 손길
+Gravity Well	중력 우물
+Great Stature	거대한 체구
+Great Weapon Master	대형 무기 달인
+Greater Portent	상급 전조
+Guarded Mind	보호된 정신
+Guardian Coil	수호의 똬리
+Guardian Spirit	수호령
+Guile of the Cloud Giant	구름 거인의 교활함
+Gunner	사수
+Hand of Ultimate Mercy	궁극의 자비의 손
+Healer	치유사
+Heart of the Storm	폭풍의 심장
+Hearth of Moonlight and Shadow	달빛과 그림자의 화롯가
+Heavily Armored	중갑 숙련
+Heavy Armor Master	중갑 달인
+Helpful	도움
+Heroic Destiny	영웅적 운명
+Hidden Paths	숨겨진 길
+Hide in Plain Sight	눈앞에서 숨기
+Hold the Line	전열 사수
+Hollow One	공허한 자
+Holy Nimbus	신성한 후광
+Hone the Blade	칼날 연마
+Hound of Ill Omen	불길한 징조의 사냥개
+Hour of Reaping	수확의 시간
+Hurl Through Hell	지옥으로 내던지기
+Iconoclast	우상 파괴자
+Illusory Reality	환영 현실
+Illusory Self	환영 자아
+Immortal Will	불멸의 의지
+Impostor	사칭자
+Improved Abjuration	향상된 방호술
+Improved Critical	향상된 치명타
+Improved Defender	향상된 수호자
+Improved Defense	향상된 방어
+Improved Divine Smite	향상된 신성 강타
+Improved Duplicity	향상된 분신
+Improved Flare	향상된 섬광
+Improved Reaper	향상된 사신
+Improved War Magic	향상된 전쟁 마법
+Indestructible Life	파괴되지 않는 생명
+Indomitable	불굴
+Indomitable (three uses)	불굴 (3회)
+Indomitable (two uses)	불굴 (2회)
+Indomitable Improvement	불굴 향상
+Indomitable Might	불굴의 힘
+Inescapable Destruction	피할 수 없는 파괴
+Infectious Fury	전염되는 격노
+Infectious Inspiration	전염되는 영감
+Infernal Constitution	지옥의 체질
+Infiltration Expertise	잠입 전문화
+Infuse Item	물품 주입
+Inheritor	상속자
+Initiate of High Sorcery	고위 마법 입문자
+Inscrutable	속을 알 수 없음
+Insightful Manipulator	통찰력 있는 조종자
+Inspiring Help	고무적인 도움
+Inspiring Help Improvement	고무적인 도움 향상
+Inspiring Leader	고무적인 지도자
+Inspiring Surge	고무적인 쇄도
+Instinctive Charm	본능적 매혹
+Instinctive Pounce	본능적 덮치기
+Intimidating Presence	위협적인 존재감
+Intoxicated Frenzy	취중 광란
+Inured to Undeath	언데드에 대한 면역
+Invincible Conqueror	무적의 정복자
+Iron Mind	강철 정신
+Jack of All Trades	만능재주꾼
+Keen Mind	예리한 정신
+Keenness of the Stone Giant	바위 거인의 예리함
+Keeper of Souls	영혼의 수호자
+Ki	기
+Ki-Empowered Strikes	기 강화 타격
+Ki-Fueled Attack	기 연료 공격
+Knight of the Crown	왕관 기사
+Knight of the Rose	장미 기사
+Knight of the Sword	검 기사
+Know Your Enemy	적을 알라
+Land's Stride	대지 활보
+Lay on Hands	안수 치유
+Legion of One	일인 군단
+Lifelong Companion	평생의 동반자
+Lightly Armored	경갑 숙련
+Limited Wish	제한된 소원
+Linguist	언어학자
+Littlest Yeti	꼬마 예티
+Living Legend	살아있는 전설
+Living Shadow	살아있는 그림자
+Lucky	행운
+Lunar Boons	달의 은총
+Lunar Empowerment	달의 강화
+Lunar Phenomenon	달의 현상
+Mage Slayer	마법사 처단자
+Magic Arrow	마법 화살
+Magic Initiate	마법 입문자
+Magic Item Adept	마법 물품 숙련자
+Magic Item Master	마법 물품 달인
+Magic Item Savant	마법 물품 대가
+Magic-User's Nemesis	마법 사용자의 천적
+Magical Ambush	마법 매복
+Magical Guidance	마법의 인도
+Magical Inspiration	마법적 영감
+Magical Secrets	마법 비밀
+Magical Tinkering	마법 땜질
+Malleable Illusions	가변 환영
+Manifest Mind	정신 현현
+Mantle of Majesty	위엄의 망토
+Mantle of Whispers	속삭임의 망토
+Martial Adept	무예 숙련자
+Martial Archetype	무예 원형
+Martial Arts	무술
+Martial Role	전투 역할
+Martial Versatility	무예 다재다능
+Master Duelist	결투의 대가
+Master of Hexes	주술의 대가
+Master of Nature	자연의 대가
+Master of Runes	룬의 대가
+Master Scrivener	필경의 대가
+Master Transmuter	변환의 대가
+Master's Flourish	달인의 화려함
+Mastery of Death	죽음의 숙달
+Medium Armor Master	평갑 달인
+Memory of One Thousand Steps	천 걸음의 기억
+Metamagic	메타매직
+Metamagic Adept	메타매직 숙련자
+Midwinter Child	한겨울의 아이
+Mighty Impel	강력한 추진
+Mighty Summoner	강력한 소환사
+Mighty Swarm	강력한 군체
+Mindless Rage	무심한 격노
+Misdirection	주의 돌리기
+Mist Walker	안개 보행자
+Mist Wanderer	안개 방랑자
+Misty Escape	안개 탈출
+Misty Wanderer	안개 같은 방랑자
+Mobile	기동력
+Moderately Armored	평갑 숙련
+Momentary Stasis	순간 정지
+Monastic Tradition	수도원 전통
+Mortal Bulwark	필멸의 보루
+Mounted Combatant	기마 전투가
+Multiattack	다중 공격
+Mystic Arcanum (6th level)	신비 비전 (6레벨)
+Mystic Arcanum (7th level)	신비 비전 (7레벨)
+Mystic Arcanum (8th level)	신비 비전 (8레벨)
+Mystic Arcanum (9th level)	신비 비전 (9레벨)
+Mystic Order	미스틱 교단
+Mystical Connection	신비한 연결
+Mystical Recovery	신비한 회복
+Natural Explorer	자연 탐험가
+Natural Explorer improvement	자연 탐험가 향상
+Nature's Sanctuary	자연의 성역
+Nature's Veil	자연의 장막
+Nature's Ward	자연의 수호
+Necrotic Husk	사령의 껍데기
+Nyxborn	닉스 태생
+Observant	관찰력
+Oceanic Soul	대양의 영혼
+Oketra's Blessing	오케트라의 축복
+Old Flame	옛 연인
+One with the Blade	검과 하나
+One with the Word	말과 하나
+Opportunist	기회주의자
+Optional Rule: Firearm Proficiency	선택 규칙: 화기 숙련
+Oracle	신탁자
+Orc Stone	오크 돌
+Orcish Fury	오크의 격노
+Order's Wrath	질서의 분노
+Otherworldly Patron	이계의 후원자
+Otherworldly Wings	이계의 날개
+Outlands Envoy	아웃랜드 사절
+Overchannel	과충전
+Owlbear Whisperer	아울베어 속삭이는 자
+Pact Magic	계약 마법
+Panache	멋
+Peerless Skill	비할 데 없는 기술
+Perfect Self	완벽한 자아
+Perfected Armor	완성된 갑옷
+Perfected Bond	완성된 유대
+Persistent Rage	지속되는 격노
+Phantom Knife	유령 칼
+Physician's Touch	의사의 손길
+Piercer	관통자
+Pious	경건함
+Pirate Cannibal	식인 해적
+Planar Wanderer	차원 방랑자
+Poisoner	독살자
+Polearm Master	장병기 달인
+Potent Cantrip	강력한 소마법
+Potent Cantrips	강력한 소마법
+Potent Psionics (1d8)	강력한 초능력 (1d8)
+Potent Psionics (2d8)	강력한 초능력 (2d8)
+Potent Spellcasting	강력한 주문시전
+Power Surge	힘의 쇄도
+Primal Awareness	원시적 인지
+Primal Champion	원시의 투사
+Primal Knowledge	원시의 지식
+Primal Path	원시의 길
+Primal Strike	원시의 일격
+Primeval Awareness	태고의 인지
+Prodigy	신동
+Projected Ward	투사 방호
+Protective Bond	보호의 유대
+Protective Spirit	보호의 영혼
+Psionic Body	초능력의 몸
+Psionic Disciplines and Talents	초능력 수련과 재능
+Psionic Investigation	초능력 조사
+Psionic Mastery (1/Day)	초능력 숙달 (1/일)
+Psionic Mastery (2/Day)	초능력 숙달 (2/일)
+Psionic Mastery (3/Day)	초능력 숙달 (3/일)
+Psionic Mastery (4/Day)	초능력 숙달 (4/일)
+Psionic Resilience	초능력 회복력
+Psionic Sorcery	초능력 마력
+Psionic Surge	초능력 쇄도
+Psionics	초능력
+Psychic Defenses	정신 방어
+Psychic Veil	정신 장막
+Purity of Body	신체의 순수
+Purity of Spirit	정신의 순수
+Pyromancer's Fury	화염술사의 격노
+Quickened Healing	가속 치유
+Quivering Palm	진동장
+Radiant Soul	광휘의 영혼
+Rage	격노
+Rage beyond Death	죽음을 넘어선 격노
+Raging Storm	몰아치는 폭풍
+Ranger Archetype	레인저 원형
+Rapid Strike	신속 타격
+Reckless Abandon	무모한 방종
+Reckless Attack	무모한 공격
+Reclaim Potential	잠재력 회수
+Reghed Heir	레게드의 상속자
+Reincarnation	환생
+Relentless	끈질김
+Relentless Avenger	끈질긴 복수자
+Relentless Rage	끈질긴 격노
+Reliable Talent	믿음직한 재능
+Remarkable Athlete	놀라운 운동선수
+Rend Mind	정신 찢기
+Resilient	회복력
+Resounding Strike	울려 퍼지는 일격
+Restorative Reagents	회복 시약
+Retaliation	보복
+Revelation in Flesh	육신의 계시
+Revenant Blade	레버넌트의 칼날
+Rhonas's Blessing	로나스의 축복
+Righteous Heritor	정의로운 계승자
+Ring Hunter	반지 사냥꾼
+Ritual Caster	의식 시전자
+Roguish Archetype	로그 원형
+Royal Envoy	왕실 사절
+Runaway Author	도망친 작가
+Rune Shaper	룬 조형자
+Runic Juggernaut	룬 거신
+Runic Shield	룬 방패
+Sacred Oath	신성한 맹세
+Saint of Forge and Fire	대장간과 불의 성자
+Sanctuary Vessel	성소 그릇
+Savage Attacker	야만적 공격자
+Scion of the Outer Planes	외부 차원계의 후예
+Scornful Rebuke	경멸의 질책
+Searing Arc Strike	작열 호 타격
+Searing Sunburst	작열하는 태양 폭발
+Searing Vengeance	작열하는 복수
+Second Chance	두 번째 기회
+Second Skin	제2의 피부
+Second Wind	재기의 바람
+Second Wind Improvement	재기의 바람 향상
+Sentinel	파수꾼
+Sentinel at Death's Door	죽음 문턱의 파수꾼
+Shadow Lore	그림자 전승
+Shadow Martyr	그림자 순교자
+Shadow Step	그림자 걸음
+Shadow Touched	그림자의 손길
+Shadow Walk	그림자 보행
+Shadowy Dodge	그림자 회피
+Shapechanger	변신자
+Share Spells	주문 공유
+Sharp Mind	날카로운 정신
+Sharpen the Blade	칼날 벼리기
+Sharpshooter	명사수
+Shield Master	방패 달인
+Shielding Storm	보호하는 폭풍
+Sidekick Class	사이드킥 클래스
+Signature Spells	대표 주문
+Skill Expert	기술 전문가
+Skilled	숙련자
+Skulker	잠복자
+Slaad Host	슬라드 숙주
+Slasher	베는 자
+Slayer's Counter	처단자의 반격
+Slippery Mind	미끄러운 정신
+Slow Fall	느린 낙하
+Sneak Attack	암습
+Song of Defense	방어의 노래
+Song of Rest (d10)	휴식의 노래 (d10)
+Song of Rest (d12)	휴식의 노래 (d12)
+Song of Rest (d6)	휴식의 노래 (d6)
+Song of Rest (d8)	휴식의 노래 (d8)
+Song of Victory	승리의 노래
+Sorcerous Origin	마력의 근원
+Sorcerous Restoration	마력 회복
+Sorcerous Versatility	마력의 다재다능
+Soul Blades	영혼 칼날
+Soul of Artifice	기교의 영혼
+Soul of Deceit	기만의 영혼
+Soul of the Forge	대장간의 영혼
+Soul of the Storm Giant	폭풍 거인의 영혼
+Soul of Vengeance	복수의 영혼
+Spectral Defense	유령 방어
+Spectral Form	유령 형상
+Spell Bombardment	주문 폭격
+Spell Breaker	주문 파괴자
+Spell Mastery	주문 숙달
+Spell Resistance	주문 저항
+Spell Sniper	주문 저격수
+Spell Thief	주문 도둑
+Spell-Storing Item	주문 저장 물품
+Spellcasting	주문시전
+Spellcasting Focus	주문시전 매개체
+Spiked Retribution	가시 응징
+Spirit Medium	영매
+Spirit Projection	영혼 투사
+Spirit Session	강령회
+Spirit Shield	영혼 방패
+Spirit Walker	영혼 보행자
+Split Enchantment	분할 환혹
+Spreading Spores	퍼지는 포자
+Spy	첩자
+Squat Nimbleness	땅딸막한 날렵함
+Squire of Solamnia	솔람니아의 종자
+Stalker's Flurry	추적자의 연타
+Steady Aim	안정된 조준
+Steady Eye	안정된 눈
+Steps of Night	밤의 걸음
+Stillness of Mind	정신의 고요
+Storm Guide	폭풍 인도자
+Storm Soul	폭풍 영혼
+Storm's Fury	폭풍의 격노
+Stormborn	폭풍 태생
+Strength before Death	죽음 앞의 힘
+Strength of Mind	정신의 힘
+Strike of the Giants	거인의 일격
+Strike of the Giants; Cloud	거인의 일격; 구름
+Strike of the Giants; Fire	거인의 일격; 화염
+Strike of the Giants; Frost	거인의 일격; 서리
+Strike of the Giants; Hill	거인의 일격; 언덕
+Strike of the Giants; Stone	거인의 일격; 바위
+Strike of the Giants; Storm	거인의 일격; 폭풍
+Strixhaven Initiate	스트릭스헤이븐 입문자
+Strixhaven Mascot	스트릭스헤이븐 마스코트
+Stroke of Luck	행운의 일격
+Stunning Strike	기절 타격
+Sudden Strike	기습 타격
+Sun Shield	태양 방패
+Superior Critical	상급 치명타
+Superior Hunter's Defense	상급 사냥꾼의 방어
+Superior Inspiration	상급 영감
+Superior Mobility	상급 기동력
+Superior Teleportation	상급 순간이동
+Supernatural Defense	초자연적 방어
+Supernatural Resistance	초자연적 저항
+Supreme Healing	지고의 치유
+Supreme Sneak	최상급 은신
+Surge of Health	건강의 쇄도
+Survivor	생존자
+Svirfneblin Magic	스버프네블린 마법
+Swarming Dispersal	군체 분산
+Symbiotic Being	공생체
+Tavern Brawler	선술집 싸움꾼
+Telekinetic	염동력자
+Telekinetic Adept	염동력 숙련자
+Telekinetic Master	염동력 달인
+Telepathic	텔레파시 능력자
+Telepathy	텔레파시
+The Right Tool for the Job	적재적소의 도구
+The Third Eye	제3의 눈
+Thief's Reflexes	도둑의 반사신경
+Thieves' Cant	도둑 은어
+Thought Shield	생각의 방패
+Thousand Forms	천의 형상
+Thunderbolt Strike	벼락 일격
+Timeless Body	시간을 초월한 몸
+Tipsy Sway	비틀거리는 몸놀림
+Tireless Spirit	지칠 줄 모르는 영혼
+Tokens of the Departed	떠난 자의 징표
+Tongue of the Sun and Moon	해와 달의 혀
+Tool Expertise	도구 전문화
+Totemic Attunement	토템 조율
+Touch of the Long Death	긴 죽음의 손길
+Tough	강인함
+Trance of Order	질서의 무아지경
+Tranquility	평온
+Transmuter's Stone	변환술사의 돌
+Trauma Survivor	트라우마 생존자
+Traveler	여행자
+Twilight Shroud	황혼의 장막
+Twinkling Constellations	반짝이는 별자리
+Umbral Form	그림자 형상
+Unarmored Defense	비무장 방어
+Unarmored Movement	비무장 이동
+Unarmored Movement improvement	비무장 이동 향상
+Unbreakable Majesty	깨지지 않는 위엄
+Uncanny Dodge	기묘한 회피
+Undead Thralls	언데드 노예
+Underdark Experience	언더다크 경험
+Undying Nature	불사의 본성
+Undying Sentinel	불사의 파수꾼
+Unearthly Recovery	초자연적 회복
+Unerring Accuracy	빗나가지 않는 정확성
+Unerring Eye	틀림없는 눈
+Unfailing Inspiration	흔들림 없는 영감
+Universal Speech	보편 언어
+Unscarred	상처 없는 자
+Unstable Backlash	불안정한 반발
+Unyielding Spirit	굴하지 않는 영혼
+Use Magic Device	마법 장치 사용
+Using a Discipline	수련 사용
+Vanish	사라짐
+Vengeful Ancestors	복수하는 선조
+Versatile Trickster	다재다능한 사기꾼
+Vigilant Defender	경계하는 수호자
+Vigilant Rebuke	경계의 질책
+Vigor of the Hill Giant	언덕 거인의 활력
+Violent Attraction	격렬한 인력
+Visage of the Astral Self	아스트랄 자아의 얼굴
+Visions of the Past	과거의 환영
+Walker in Dreams	꿈속을 걷는 자
+War Caster	전쟁 시전자
+Warding Maneuver	방호 기동
+Warping Implosion	왜곡 내파
+Watchers	감시자
+Waxing and Waning	차고 기움
+Weapon Master	무기 달인
+Wholeness of Body	신체의 온전함
+Wild Companion	야생 동료
+Wild Shape	야생 변신
+Wild Shape Improvement	야생 변신 향상
+Wind Soul	바람 영혼
+Wings Unfurled	펼쳐진 날개
+Wood Elf Magic	우드 엘프 마법
+Writhing Tide	몸부림치는 조류
+Zealous Presence	열성적인 존재감

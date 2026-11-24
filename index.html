@@ -2772,7 +2772,7 @@
 
 
     // ===== 서버 연결: google.script.run 이 응답 없으면 같은 주소로 직접 요청(fetch)으로 자동 전환 =====
-    const EXEC_URL_DEFAULT = 'https://script.google.com/macros/s/AKfycbzGg9xjcoyXRrmVvUHSnUZWz2yHC34U3EuPDmqNgACunJQXYt-Y5a9Tn8JSRs6g9Je-/exec';
+    const EXEC_URL_DEFAULT = 'https://script.google.com/macros/s/AKfycbxiIO59Dqk-0J9l3lN82kKoaOidaCoHoKHclhDHzXcKzAzk1fm_SnhjwbUF2ttQr8G_/exec';
     function execUrl() { try { return localStorage.getItem('adventure_exec_url') || EXEC_URL_DEFAULT; } catch (e) { return EXEC_URL_DEFAULT; } }
     function diagShow(msg) { try { console.info('[sync]', msg); } catch (e) {} }
     const AUTH_S = { tk: (() => { try { return localStorage.getItem('adv_dev_tk') || ''; } catch (e) { return ''; } })(), gm: false, off: false, st: null, gate: false, bg: '' };
@@ -4483,6 +4483,25 @@
     const IMG = { off: false, busy: false, map: (() => { try { return JSON.parse(localStorage.getItem('adv_img_map') || '{}'); } catch (e) { return {}; } })() };
     const IMG_MIN = 40000; // 이 글자 수보다 큰 base64 이미지만 옮김
     function imgHash(s) { let a = 2166136261, b = 5381; for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); a = Math.imul(a ^ c, 16777619); b = (b * 33 + c) | 0; } return (a >>> 0).toString(36) + (b >>> 0).toString(36) + s.length.toString(36); }
+    // 드라이브 업로드가 안 되는 상태에서 아주 큰 이미지(2MB 이상)는 저장이 계속 실패하므로, 브라우저에서 줄여서(최대 1600px, webp) 저장
+    function imgHuge() { return imgBig().filter(([o, k]) => o[k].length > 2000000 && !/^data:image\/gif/i.test(o[k])); }
+    async function imgShrink() {
+      const items = imgHuge(), cache = {}; let n = 0;
+      for (const [o, k] of items) {
+        const v = o[k]; if (cache[v] === undefined) {
+          cache[v] = null;
+          try {
+            const im = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = v; });
+            const s = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement('canvas');
+            c.width = Math.max(1, Math.round(im.naturalWidth * s)); c.height = Math.max(1, Math.round(im.naturalHeight * s));
+            c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+            const r = c.toDataURL('image/webp', 0.85); if (r.startsWith('data:image/webp') && r.length < v.length) cache[v] = r;
+          } catch (e) {}
+        }
+        if (cache[v]) { o[k] = cache[v]; n++; }
+      }
+      return n;
+    }
     function imgBig() {
       const out = [], seen = new Set();
       const walk = o => { if (!o || typeof o !== 'object' || seen.has(o)) return; seen.add(o); for (const k in o) { const v = o[k]; if (typeof v === 'string') { if (v.length > IMG_MIN && v.startsWith('data:image/')) out.push([o, k]); } else if (v && typeof v === 'object') walk(v); } };
@@ -4598,6 +4617,7 @@
       saveTimer = setTimeout(() => {
         if (saveInFlight && Date.now() - saveInFlight < 45000) { saveAgain = true; return; }
         if (!IMG.off && !IMG.busy && imgBig().length) { imgExt().then(() => persistState(forceOverwrite), () => persistState(forceOverwrite)); return; }
+        if (IMG.off && !IMG.shrinking && !IMG.shrinkDone && imgHuge().length) { IMG.shrinking = true; imgShrink().then(n => { IMG.shrinking = false; IMG.shrinkDone = true; if (n) { try { showToast('너무 큰 이미지 ' + n + '곳을 줄여서 저장해요'); renderAll(); } catch (e) {} } IMG.off = IMG.off; persistState(forceOverwrite); }, () => { IMG.shrinking = false; IMG.shrinkDone = true; persistState(forceOverwrite); }); return; }
         saveInFlight = Date.now(); let sentSnap = null; try { sentSnap = syncSnap(); } catch (e) {}
         const done = () => { saveInFlight = 0; if (saveAgain) { saveAgain = false; persistState(); } };
         srvSave({
@@ -5088,7 +5108,7 @@
         return { n: p.name || '', gp: Number(m.gp) || 0, sp: Number(m.sp) || 0, cp: Number(m.cp) || 0, L: (d.ledger || []).filter(e => /·\s*(구매|판매)\s*:/.test(e.text || '')).slice(0, 40).map(e => String(e.d || '').replace(/\|/g, '/') + '|' + e.text) };
       });
       const o = { pcs }, r = r20Rt(); if (r) o.date = r;
-      return '!상점반영 ' + JSON.stringify(o).replace(/\[\[/g, '[ [').replace(/\]\]/g, '] ]').replace(/\{\{/g, '{ {').replace(/\}\}/g, '} }');
+      return '!상점반영 ' + encodeURIComponent(JSON.stringify(o));
     }
     function r20Copy(kind) {
       const txt = kind === 'date' ? r20DateCmd() : r20ShopCmd();

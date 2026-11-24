@@ -2643,6 +2643,12 @@
     </div>
   </div>
 
+  <script>/* 같은 GitHub 계정의 다른 사이트와 브라우저 저장소가 섞이지 않게 키에 접두어를 붙임 (3차: 드래곤하이스트도 적용)
+   처음 한 번은 예전에 접두어 없이 저장해 둔 이 사이트 값(로그인·임시 저장본 등)을 새 이름으로 옮겨서, 다시 로그인할 필요가 없어요. */
+(function(){var P='dragonheist:',g=Storage.prototype.getItem,st=Storage.prototype.setItem,r=Storage.prototype.removeItem;
+[window.localStorage,window.sessionStorage].forEach(function(S){try{if(!S||g.call(S,P+'__moved'))return;var ks=[];for(var i=0;i<S.length;i++){var k=S.key(i);if(k&&!/^(pandelver|weekday|dragonheist):/.test(k)&&!/^(recover_|map_sb_)/.test(k))ks.push(k);}
+ks.forEach(function(k){try{var v=g.call(S,k);if(g.call(S,P+k)===null)st.call(S,P+k,v);r.call(S,k);}catch(e){}});st.call(S,P+'__moved','1');}catch(e){}});
+Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype.setItem=function(k,v){return st.call(this,P+k,v)};Storage.prototype.removeItem=function(k){return r.call(this,P+k)};})();</script>
   <script>
     (function () {
       function show(msg) {

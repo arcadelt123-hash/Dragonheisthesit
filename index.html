@@ -2646,8 +2646,8 @@
   <script>/* 같은 GitHub 계정의 다른 사이트와 브라우저 저장소가 섞이지 않게 키에 접두어를 붙임 (3차: 드래곤하이스트도 적용)
    처음 한 번은 예전에 접두어 없이 저장해 둔 이 사이트 값(로그인·임시 저장본 등)을 새 이름으로 옮겨서, 다시 로그인할 필요가 없어요. */
 (function(){var P='dragonheist:',g=Storage.prototype.getItem,st=Storage.prototype.setItem,r=Storage.prototype.removeItem;
-[window.localStorage,window.sessionStorage].forEach(function(S){try{if(!S||g.call(S,P+'__moved'))return;var ks=[];for(var i=0;i<S.length;i++){var k=S.key(i);if(k&&!/^(pandelver|weekday|dragonheist):/.test(k)&&!/^(recover_|map_sb_)/.test(k))ks.push(k);}
-ks.forEach(function(k){try{var v=g.call(S,k);if(g.call(S,P+k)===null)st.call(S,P+k,v);r.call(S,k);}catch(e){}});st.call(S,P+'__moved','1');}catch(e){}});
+[window.localStorage,window.sessionStorage].forEach(function(S){try{if(!S||g.call(S,P+'__moved2'))return;var ks=[];for(var i=0;i<S.length;i++){var k=S.key(i);if(k&&!/^(pandelver|weekday|dragonheist):/.test(k)&&!/^(recover_|map_sb_)/.test(k))ks.push(k);}
+ks.forEach(function(k){try{var v=g.call(S,k);if(g.call(S,P+k)===null)st.call(S,P+k,v);r.call(S,k);}catch(e){}});st.call(S,P+'__moved2','1');}catch(e){}});
 Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype.setItem=function(k,v){return st.call(this,P+k,v)};Storage.prototype.removeItem=function(k){return r.call(this,P+k)};})();</script>
   <script>
     (function () {
@@ -11610,6 +11610,12 @@ function addTimelineNote(at) { tlNoteOpen(null, at); }
       if (typeof AUTH_S !== 'undefined' && AUTH_S.gm && !(typeof plView === 'function' && plView())) return (window.CUSTOM && window.CUSTOM.GM_NAME) || '시금치';
       var id = typeof landMe === 'function' ? landMe() : ''; var l = typeof landPls === 'function' ? landPls() : [];
       var p = l.find(function (x) { return x.id === id; }); if (p) { var pn = ''; try { var pp = typeof plsList === 'function' ? plsList().find(function (x) { return x.id === p.pl; }) : null; pn = pp && pp.name || ''; } catch (e) {} return pn || (p.name || '').replace(/\s*\(GM\)/, '') || '이름 없음'; }
+    } catch (e) {}
+    try {   // 고른 PL이 없으면: 이 기기의 내 PC 목록 → 로그인 기기에 연결된 PC 이름 → 접속 표시 이름 순서로 찾아요
+      var raw = typeof myRaw === 'function' ? myRaw() : [], pls = typeof plsList === 'function' ? plsList() : [];
+      var hit = raw.map(function (x) { return pls.find(function (q) { return q.id === x; }); }).find(Boolean); if (hit && hit.name) return hit.name;
+      var st = (typeof AUTH_S !== 'undefined' && AUTH_S.st) || {}; if (st.pcn && st.pcn !== 'GM') return String(st.pcn).split(',')[0].trim();
+      var pn2 = typeof presName === 'function' ? presName() : ''; if (pn2) return pn2;
     } catch (e) {}
     return '손님';
   }

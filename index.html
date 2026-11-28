@@ -3185,7 +3185,7 @@ Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype
       const gm = !!(AUTH_S && AUTH_S.gm) && !plView();
       if (v.ev === 'gmcast') { if (!gm) window.gmCastShow(v); return; }
       if (v.ev === 'trade') { if (gm) [3500, 9000].forEach(ms => setTimeout(() => { try { syncMergeFromServer(); } catch (e) {} setTimeout(r20Pub, 1500); }, ms)); return; }
-      if (v.ev === 'sell' && gm) { window.__sellLive[v.rid] = Date.now(); [4000, 10000].forEach(ms => setTimeout(() => { try { syncMergeFromServer(); } catch (e) {} }, ms)); }
+      if (v.ev === 'sell' && gm) { window.__sellLive[v.rid] = Date.now(); if (v.q && v.q.id) { window.__sellQ[v.q.id] = v.q; sellReqInject(); } [4000, 10000].forEach(ms => setTimeout(() => { try { syncMergeFromServer(); } catch (e) {} }, ms)); }
       if (v.ev === 'sellcancel' && gm) {
         delete window.__sellLive[v.rid];
         try { const b = state.boardTex; shopSellDrop(v.rid); (b.pcs || []).forEach(p => { const it = ((p.sheet || {}).detail || {}).items; (it || []).forEach(x => { if (x && x.sellPend === v.rid) delete x.sellPend; }); }); if (state.viewMode === 'journal' && state.jView === 'shop') { const a = document.activeElement; if (!(a && /INPUT|TEXTAREA|SELECT/.test(a.tagName))) renderShop(); } } catch (e) {}
@@ -3197,7 +3197,7 @@ Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype
     setInterval(() => {
       try {
         const b = document.getElementById('sellreq-btn'); if (!b) return;
-        const gm = !!(AUTH_S && AUTH_S.gm) && !plView(), ids = new Set((((state.boardTex || {}).sellReq) || []).map(q => q.id)), lv = window.__sellLive || {}; Object.keys(lv).forEach(k => { if (Date.now() - lv[k] > 120000) delete lv[k]; else ids.add(k); }); const n = gm ? ids.size : 0;
+        const gm = !!(AUTH_S && AUTH_S.gm) && !plView(); if (gm) sellReqInject(); const ids = new Set((((state.boardTex || {}).sellReq) || []).map(q => q.id)), lv = window.__sellLive || {}; Object.keys(lv).forEach(k => { if (Date.now() - lv[k] > 120000) delete lv[k]; else ids.add(k); }); const n = gm ? ids.size : 0;
         if (n !== __sellN) {
           if (__sellN >= 0 && n > __sellN) { sellBell(); try { showToast('요청이 왔어요.'); } catch (e) {} try { const a = document.activeElement; if (state.viewMode === 'journal' && state.jView === 'shop' && !(a && /INPUT|TEXTAREA|SELECT/.test(a.tagName))) renderShop(); } catch (e) {} }
           __sellN = n;
@@ -6677,6 +6677,7 @@ Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype
       (state.quests || []).forEach(q => out.push({ g: '퀘스트', t: q.title || '(제목 없음)', sub: [q.folder, q.sessionNum ? q.sessionNum + '회차' : ''].filter(Boolean).join(' · '), hay: [q.title, q.folder, (q.tags || []).join(' '), q.description, q.outcome].join(' '), go: () => jumpToQuest(q.id) }));
       (state.globalNpcs || []).forEach(n => out.push({ g: '인물', t: n.name || '이름 없음', sub: (n.memo || '').slice(0, 40), img: n.image, hay: [n.name, n.memo].join(' '), go: () => { setViewMode('npcs', ''); npcViewOpen(n.id); } }));
       (bt.pcs || []).forEach(p => out.push({ g: 'PC', t: p.name || 'PC', sub: '', img: p.img, hay: p.name || '', go: () => { setViewMode('journal', ''); jSet('jView', 'pc'); jSet('jPc', p.id); } }));
+      shopSrchItems().forEach(x => out.push({ g: '상점', t: x.name, sub: x.sub, img: x.img, hay: x.hay, go: x.go }));
       ((bt.store || {}).items || []).forEach(i => out.push({ g: '아이템', t: i.label || '(이름 없음)', sub: (i.detail || '').slice(0, 40), img: i.img, hay: [i.label, i.detail, i.cat].join(' '), go: () => { setViewMode('journal', ''); jSet('jView', 'items'); jSet('jStorePc', ''); } }));
       (((bt.clueBoard || {}).cards) || []).forEach(c => out.push({ g: '단서', t: String(c.text || '').slice(0, 40) || '(빈 단서)', sub: '', hay: c.text || '', go: () => { setViewMode('journal', ''); jSet('jView', 'clues'); } }));
       (bt.memos || []).forEach(m => out.push({ g: '메모', t: String(m.text || '').slice(0, 40) || '(빈 메모)', sub: '', hay: m.text || '', go: () => setViewMode('board', '') }));
@@ -6799,6 +6800,7 @@ Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype
             srchLater(() => srchFlash(document.querySelector(`#mb-view .mb-card[data-id="${c.id}"]`)));
           } });
         });
+        shopSrchItems().filter(x => srchMatch(q, x.hay)).forEach(x => out.push({ label: srchClip(x.name, 40), sub: x.sub, go: x.go }));   // 상점 상품도 함께
       } else if (ctx === 'clue') {
         const d = mbData('clue');
         d.lanes.forEach(l => { if (srchMatch(q, l.label)) out.push({ label: srchClip(l.label, 40), sub: '회차', go: () => srchFlash(document.querySelector(`#mb-view .mb-lane[data-lane="${l.id}"]`)) }); });
@@ -6838,6 +6840,14 @@ Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype
       if (SHOP_CAT && SHOP_KOP) return cb && cb();
       if (!SHOP_CLOAD) SHOP_CLOAD = fetch('shop_data/items.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(a => { SHOP_CAT = Array.isArray(a) ? a : []; SHOP_CAT.forEach(o => { o.c = o.r && o.r !== 'common' ? 'magic' : (SHOP_FMAP[o.f] || ({ weapon: 'weapon', consumable: 'cons', tool: 'tool', loot: 'gem' }[o.t]) || 'gear'); SHOP_CMAP[o.id] = o; }); }).catch(() => { SHOP_CAT = []; SHOP_CERR = true; });
       SHOP_CLOAD.then(() => SHOP_KOP || (SHOP_KOP = fetch('shop_data/ko/items.json').then(r => r.ok ? r.json() : {}).catch(() => ({})).then(k => { SHOP_KO = k || {}; }))).then(() => cb && cb());
+    }
+    // 검색용: 모든 상점의 상품 (PC 화면이면 숨긴 상품·비활성 상점은 빼요)
+    function shopSrchItems() {
+      const out = []; let gm = false; try { gm = !!AUTH_S.gm && !plView(); } catch (e) {}
+      try { shopsList().forEach(s => { if (s.off && !gm) return; (s.items || []).forEach(it => { if (it.hide && !gm) return; const o = shopRes(it), b = it.ref ? SHOP_CMAP[it.ref] : null;
+        out.push({ name: o.name, img: o.img, sub: (s.name || '상점') + (o.cp ? ' · ' + (o.cp >= 100 ? Math.round(o.cp / 100) + ' gp' : o.cp + ' cp') : ''), hay: [o.name, b && b.n, it.name, s.name].filter(Boolean).join(' '),
+          go: () => { state.shopId = s.id; state.shopQ = o.name; state.shopCat = 'all'; state.shopSel = { w: 's', k: it.id }; setViewMode('journal', ''); jSet('jView', 'shop'); } }); }); }); } catch (e) {}
+      return out;
     }
     function shopsList() { const b = state.boardTex; b.shops = Array.isArray(b.shops) ? b.shops : []; return b.shops; }
     function shopRes(it) {
@@ -7052,7 +7062,7 @@ Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype
 const gmv = gm && !plView(), tgt = shopCicTgt(), cnt = {}; (sh.items || []).forEach(it => { const c0 = shopRes(it).c; cnt[c0] = (cnt[c0] || 0) + 1; });
       const chip = c => { if (!gmv && c[0] !== 'all' && !cnt[c[0]]) return ''; const ic = c[0] !== 'all' ? shopCicGet(c[0], ed ? (tgt === 'all' ? '' : tgt) : (by.shared || !by.pc ? '' : by.pc.id)) : ''; const on = cat === c[0];
         return `<button class="bg-chip${on ? ' on' : ''}${ic ? ' ic' : ''}${ed && c[0] !== 'all' ? ' ed' : ''}" title="${c[1]}${ed && c[0] !== 'all' ? ' (눌러서 아이콘 이미지 · 주소 넣기)' : ''}" onclick="${ed && c[0] !== 'all' ? `shopCicAsk('${c[0]}')` : `state.shopCat='${c[0]}';renderShop()`}">${ic ? `<img src="${escapeHtml(ic)}" alt="${c[1]}" draggable="false">` : c[1]}</button>`; };
-      h += `<div class="bg-bar"><input type="search" id="shop-q" placeholder="검색" value="${escapeHtml(state.shopQ || '')}" oninput="state.shopQ=this.value;shopFilterKeep()"><span class="bg-chips">${SHOP_CATS.map(chip).join('')}${gmv ? `<button class="bg-chip${ed ? ' on' : ''}" onclick="state.shopIcEdit=!state.shopIcEdit;renderShop()" title="분류 아이콘 설정 (GM에게만 보여요)">${ed ? '아이콘 설정 끝' : '분류 아이콘'}</button>${ed ? `<select onchange="state.shopIcTgt=this.value;renderShop()" aria-label="적용 대상" style="padding:3px 6px;border-radius:8px"><option value="all"${tgt === 'all' ? ' selected' : ''}>적용 대상: 기본(모두)</option>${by.pcs.map(p => `<option value="${escapeHtml(p.id)}"${tgt === p.id ? ' selected' : ''}>${escapeHtml(p.name || 'PC')} 전용</option>`).join('')}</select>` : ''}` : ''}</span>
+      h += `<div class="bg-bar"><input type="search" id="shop-q" placeholder="검색" value="${escapeHtml(state.shopQ || '')}" oninput="shopQIn(this, event)" oncompositionend="shopQIn(this)"><span class="bg-chips">${SHOP_CATS.map(chip).join('')}${gmv ? `<button class="bg-chip${ed ? ' on' : ''}" onclick="state.shopIcEdit=!state.shopIcEdit;renderShop()" title="분류 아이콘 설정 (GM에게만 보여요)">${ed ? '아이콘 설정 끝' : '분류 아이콘'}</button>${ed ? `<select onchange="state.shopIcTgt=this.value;renderShop()" aria-label="적용 대상" style="padding:3px 6px;border-radius:8px"><option value="all"${tgt === 'all' ? ' selected' : ''}>적용 대상: 기본(모두)</option>${by.pcs.map(p => `<option value="${escapeHtml(p.id)}"${tgt === p.id ? ' selected' : ''}>${escapeHtml(p.name || 'PC')} 전용</option>`).join('')}</select>` : ''}` : ''}</span>
                 ${gm ? `<span class="bg-gmtools" style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px;max-width:100%"><span style="display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px"><button class="bg-chip" onclick="shopToggle('${sh.id}')" title="비활성 상인은 PC에게 보이지 않고, 물건을 사지도 팔지도 못해요">${sh.off ? '상인 활성화' : '상인 비활성화'}</button><button class="bg-chip" onclick="shopRename('${sh.id}')">상점 이름·설명</button><button class="bg-chip" onclick="shopArt('${sh.id}')">상점 그림</button><button class="bg-chip" onclick="shopNpcImport('${sh.id}')" title="도감의 NPC를 상점으로 불러오기">NPC 불러오기</button><button class="bg-chip" onclick="shopApprToggle('${sh.id}')" title="켜면 PL의 구매가 GM 승인 뒤에 처리돼요">구매 승인제 ${sh.appr ? '켜짐' : '꺼짐'}</button></span><span style="display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px"><button class="bg-chip" onclick="shopBgDlg('${sh.id}')" title="상점 배경 이미지 (기본 / 상인별)">상점 배경</button><button class="bg-chip" onclick="shopCatPick('${sh.id}')">+ 카탈로그에서 추가</button><button class="bg-chip" onclick="shopItemEdit('${sh.id}','')">+ 직접 만들기</button><button class="bg-chip" onclick="shopDel('${sh.id}')">상점 삭제</button></span></span>` : ''}</div>`;
       const ok = o => (cat === 'all' || o.c === cat) && (!q || o.name.toLowerCase().includes(q));
       shopMsSync(); const shopRows = (sh.items || []).filter(it => gm || !it.hide).map(it => ({ it, o: Object.assign(shopRes(it), { hide: !!it.hide }) })).filter(r => ok(r.o));
@@ -7101,6 +7111,17 @@ const gmv = gm && !plView(), tgt = shopCicTgt(), cnt = {}; (sh.items || []).forE
       if (lv && lv.i) { const sh = shopsList().find(s => s.id === state.shopId); const it = sh && (sh.items || []).find(x => { try { return shopRes(x).name === lv.i; } catch (e) { return false; } }); if (it) state.shopSel = { w: 's', k: it.id }; }
       try { if (state.viewMode === 'journal' && state.jView === 'shop') renderShop(); } catch (e) {}
     }
+        // 상점 검색: 입력칸은 그대로 두고 상품·가방 칸만 바꿔요 (입력칸을 새로 만들면 한글이 'ㅍㅗㅅㅕㄴ'처럼 흩어져요)
+        let shopQT = null;
+        function shopQIn(el, ev) { state.shopQ = el.value; clearTimeout(shopQT); shopQT = setTimeout(shopGridsOnly, 120); }
+        function shopGridsOnly() {
+          const area = document.getElementById('main-content-area'), inp = document.getElementById('shop-q'); if (!area || !inp) return shopFilterKeep();
+          const tmp = document.createElement('div'); tmp.style.display = 'none'; area.id = ''; tmp.id = 'main-content-area'; document.body.appendChild(tmp);
+          try { renderShop(); } catch (e) { console.error(e); } finally { tmp.remove(); area.id = 'main-content-area'; }
+          const a = area.querySelectorAll('.bg-grid'), b = tmp.querySelectorAll('.bg-grid');
+          if (a.length !== b.length || !a.length) return shopFilterKeep();
+          a.forEach((g, i) => { g.innerHTML = b[i].innerHTML; });
+        }
         function shopFilterKeep() { const v = (document.getElementById('shop-q') || {}).value, p = (document.getElementById('shop-q') || {}).selectionStart; renderShop(); const e = document.getElementById('shop-q'); if (e) { e.focus(); try { e.setSelectionRange(p, p); } catch (x) {} } }
     function shopBuy(sid, iid, nOver, done) {
       const fin = ok => { try { done && done(ok); } catch (e) {} };
@@ -7191,7 +7212,7 @@ const gmv = gm && !plView(), tgt = shopCicTgt(), cnt = {}; (sh.items || []).forE
       const id = 'sr_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
       b.sellReq.push({ id, pc: by.shared ? '-' : by.pc.id, pcName: by.shared ? '공용 가방' : (by.pc.name || 'PC'), shop: sh.id, shopName: sh.name || '', name: x.name || '물건', qty: n, price: gain, sid: by.shared ? (x._sid || '') : '', t: Date.now() });
       if (!by.shared) x.sellPend = id;
-      try { window.__fbcSend && window.__fbcSend({ ev: 'sell', rid: id, t: '[판매 요청] ' + (x.name || '물건') + (n > 1 ? ' ×' + n : '') + ' · ' + shopPriceTxt(gain) + ' (' + (sh.name || '') + ')' }); } catch (e) {}
+      try { window.__fbcSend && window.__fbcSend({ ev: 'sell', rid: id, q: b.sellReq[b.sellReq.length - 1], t: '[판매 요청] ' + (x.name || '물건') + (n > 1 ? ' ×' + n : '') + ' · ' + shopPriceTxt(gain) + ' (' + (sh.name || '') + ')' }); } catch (e) {}
       state.shopSel = null; persistState(); try { sheetSend(); } catch (e) {}
       showToast('판매 요청을 보냈어요. GM이 확인하면 대금이 들어와요.'); renderShop();
     }
@@ -7207,17 +7228,25 @@ const gmv = gm && !plView(), tgt = shopCicTgt(), cnt = {}; (sh.items || []).forE
       persistState(); try { sheetSend(); } catch (e) {} showToast('판매 요청을 취소했어요.'); renderShop();
     }
     function shopReqHtml() {
+      if (AUTH_S.gm && !plView()) sellReqInject();
       const b = state.boardTex, L = Array.isArray(b.sellReq) ? b.sellReq : []; if (!L.length || !AUTH_S.gm || plView()) return '';
       return `<div class="bg-req" style="border:1.5px solid #b99a5b;background:rgba(185,154,91,.12);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px"><b>요청 ${L.length}건</b>` + L.map(q => `<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px"><span>${q.kind === 'buy' ? '[구매] ' : '[판매] '}${escapeHtml(q.pcName || 'PC')} · ${escapeHtml(q.name)}${q.qty > 1 ? ' ×' + q.qty : ''} <small style="opacity:.7">(${escapeHtml(q.shopName || '')})</small></span><span style="flex:1"></span>${q.kind === 'buy' ? `<span>${shopPriceTxt(q.price)}</span>` : `<label style="display:flex;gap:4px;align-items:center">대금 <input type="number" min="0" step="any" id="sr-p-${q.id}" value="${(q.price / 100).toFixed(2).replace(/\.?0+$/, '')}" style="width:80px"> gp</label>`}<button class="bg-btn" onclick="shopSellApprove('${q.id}')">승인</button><button class="bg-btn" onclick="shopSellReject('${q.id}')">거절</button></div>`).join('') + '</div>';
     }
-    function shopSellDrop(id) { const b = state.boardTex; b.sellReq = (b.sellReq || []).filter(q => q.id !== id); }
+    function shopSellDrop(id) { const b = state.boardTex; b.sellReq = (b.sellReq || []).filter(q => q.id !== id); window.__sellDone[id] = 1; delete window.__sellQ[id]; }
+    // 요청이 한꺼번에 여러 개 오면 저장이 서로 덮여 목록에서 빠질 수 있어서, 실시간 알림에 실어 온 요청을 GM 쪽에서 다시 채워 넣어요
+    window.__sellQ = window.__sellQ || {}; window.__sellDone = window.__sellDone || {};
+    function sellReqInject() {
+      try { const b = state.boardTex; if (!b) return 0; b.sellReq = Array.isArray(b.sellReq) ? b.sellReq : []; let n = 0;
+        Object.keys(window.__sellQ).forEach(id => { const q = window.__sellQ[id]; if (window.__sellDone[id] || Date.now() - (q.t || 0) > 6 * 3600e3) { delete window.__sellQ[id]; return; } if (!b.sellReq.some(r => r.id === id)) { b.sellReq.push(q); n++; } });
+        return n; } catch (e) { return 0; }
+    }
     function shopSellApprove(id) {
       if (!AUTH_S.gm || plView()) return; const b = state.boardTex, q = (b.sellReq || []).find(r => r.id === id); if (!q) return;
       if (q.kind === 'buy') return shopBuyDecide(id, true);
       const gp = parseFloat((document.getElementById('sr-p-' + id) || {}).value), total = isNaN(gp) ? q.price : Math.max(0, Math.round(gp * 100));
       let by, k = -1;
       if (q.pc === '-') { by = { shared: true, pcs: [], pc: null }; const d = shopData(by); k = d.items.findIndex(x => x._sid && x._sid === q.sid); }
-      else { const pc = (b.pcs || []).find(p => p.id === q.pc); if (!pc) { shopSellDrop(id); persistState(); renderShop(); showToast('PC를 찾지 못해 요청을 지웠어요.'); return; } by = { shared: false, pcs: [], pc }; const d = shopData(by); k = d.items.findIndex(x => x.sellPend === id); }
+      else { const pc = (b.pcs || []).find(p => p.id === q.pc); if (!pc) { shopSellDrop(id); persistState(); renderShop(); showToast('PC를 찾지 못해 요청을 지웠어요.'); return; } by = { shared: false, pcs: [], pc }; const d = shopData(by); k = d.items.findIndex(x => x.sellPend === id); if (k < 0) { k = d.items.findIndex(x => !x.sellPend && !x.equipped && (x.name || '물건') === q.name); if (k >= 0) d.items[k].sellPend = id; } }
       const d2 = shopData(by), x = d2.items[k];
       if (!x) { shopSellDrop(id); persistState(); renderShop(); showToast('그 아이템이 이미 없어서 요청을 지웠어요.'); return; }
       if (!confirm(q.pcName + ' 의 ' + q.name + (q.qty > 1 ? ' ×' + q.qty : '') + ' 을(를) ' + shopPriceTxt(total) + ' 에 사 줄까요?')) return;
@@ -7371,7 +7400,7 @@ const gmv = gm && !plView(), tgt = shopCicTgt(), cnt = {}; (sh.items || []).forE
       if (b.sellReq.some(r => r.kind === 'buy' && r.pc === pid && r.item === it.id)) { showToast('이미 구매 요청 중이에요.'); return; }
       const id = 'sr_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
       b.sellReq.push({ id, kind: 'buy', pc: pid, pcName: by.shared ? '공용 가방' : (by.pc.name || 'PC'), shop: sh.id, shopName: sh.name || '', item: it.id, name: o.name, qty: n, price: total, t: Date.now() });
-      try { window.__fbcSend && window.__fbcSend({ ev: 'sell', rid: id, t: '[구매 요청] ' + o.name + (n > 1 ? ' ×' + n : '') + ' · ' + shopPriceTxt(total) + ' (' + (sh.name || '') + ')' }); } catch (e) {}
+      try { window.__fbcSend && window.__fbcSend({ ev: 'sell', rid: id, q: b.sellReq[b.sellReq.length - 1], t: '[구매 요청] ' + o.name + (n > 1 ? ' ×' + n : '') + ' · ' + shopPriceTxt(total) + ' (' + (sh.name || '') + ')' }); } catch (e) {}
       persistState(); showToast('구매 요청을 보냈어요. GM이 확인하면 처리돼요.'); renderShop();
     }
     function shopBuyDecide(id, ok) {

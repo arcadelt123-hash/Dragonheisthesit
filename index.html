@@ -5227,7 +5227,7 @@ Storage.prototype.getItem=function(k){return g.call(this,P+k)};Storage.prototype
         return { n: p.name || '', gp: Number(m.gp) || 0, sp: Number(m.sp) || 0, cp: Number(m.cp) || 0, L: (d.ledger || []).filter(e => /·\s*(구매|판매)\s*:/.test(e.text || '')).slice(0, lim || 40).map(e => String(e.d || '').replace(/\|/g, '/') + '|' + e.text) };
       });
       const o = { pcs }, r = forHash ? null : r20Rt(); if (r) o.date = r;
-      if (!forHash) try { const E = {}; shopsList().forEach(sh => (sh.items || []).forEach(it => { const b = it.ref && SHOP_CMAP[it.ref]; if (b && b.n) { const k = shopRes(it).name; if (k && k !== b.n) E[k] = b.n; } })); if (Object.keys(E).length) o.E = E; } catch (e) {}
+      if (!forHash) try { const used = new Set(); pcs.forEach(p => p.L.forEach(l => { const m = l.match(/·\s*(?:구매|판매)\s*:\s*(.+?)(?:\s+\([^()]*\))?\s*$/); if (m) used.add(m[1].replace(/\s*×\s*\d+$/, '').trim()); })); const E = {}; shopsList().forEach(sh => (sh.items || []).forEach(it => { const b = it.ref && SHOP_CMAP[it.ref]; if (b && b.n) { const k = shopRes(it).name; if (k && k !== b.n && used.has(k)) E[k] = b.n; } })); if (Object.keys(E).length) o.E = E; } catch (e) {}   /* 2026-11-28: 장부에 나온 아이템만 영어 이름을 붙여서 명령을 짧게 */
       return '!상점반영 ' + encodeURIComponent(JSON.stringify(o));
     }
     function r20Copy(kind) {
